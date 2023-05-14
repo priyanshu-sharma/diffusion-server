@@ -1,0 +1,22 @@
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+skip-string-normalization = true
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | ve
+  | venv
+  | src\model_engine\migrations\versions
+  | src\model_engine\product_domain\migrations
+  | src\model_engine\dataset_domain\migrations
+)/
+'''
