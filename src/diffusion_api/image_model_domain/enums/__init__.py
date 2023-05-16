@@ -1,0 +1,2 @@
+from image_model_domain.enums.image_owner_type import ImageOwnerType
+from image_model_domain.enums.hosted import Hosted

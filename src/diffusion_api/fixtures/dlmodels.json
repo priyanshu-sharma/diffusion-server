@@ -1,0 +1,46 @@
+[{
+    "model": "image_model_domain.dlmodels",
+    "pk": "ab900031-4256-4de9-a2c6-4ef948db6b4a",
+    "fields": {
+        "install_ts": "2023-05-15 01:14:00",
+        "update_ts": "2023-05-15 01:15:00",
+        "name": "stable-diffusion-v1-5",
+        "owner": "runwayml",
+        "hosted": "HUGGING_FACE",
+        "meta": {}
+    }
+}, {
+    "model": "image_model_domain.dlmodels",
+    "pk": "2b900031-4256-21e9-a2c6-4ef948db6b4f",
+    "fields": {
+        "install_ts": "2023-05-15 01:14:00",
+        "update_ts": "2023-05-15 01:15:00",
+        "name": "stable-diffusion-2",
+        "owner": "stabilityai",
+        "hosted": "HUGGING_FACE",
+        "meta": {}
+    }
+},{
+    "model": "image_model_domain.dlmodels",
+    "pk": "7514e4e1-bebb-45b2-953e-cfe4029dd883",
+    "fields": {
+        "install_ts": "2023-05-15 01:14:00",
+        "update_ts": "2023-05-15 01:15:00",
+        "name": "stable-diffusion-2-1",
+        "owner": "stabilityai",
+        "hosted": "HUGGING_FACE",
+        "meta": {}
+    }
+
+}, {
+    "model": "image_model_domain.dlmodels",
+    "pk": "05eaa2a3-bf50-4ef4-9790-db8cd71e292f",
+    "fields": {
+        "install_ts": "2023-05-15 01:14:00",
+        "update_ts": "2023-05-15 01:15:00",
+        "name": "stable-diffusion-v1-4",
+        "owner": "CompVis",
+        "hosted": "HUGGING_FACE",
+        "meta": {}
+    }
+}]

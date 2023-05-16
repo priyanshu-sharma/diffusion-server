@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'corsheaders',
     # application modules
+    'image_model_domain',
 ]
 
 REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
@@ -86,16 +87,23 @@ WSGI_APPLICATION = 'server_config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
-#     "default": {"ENGINE": "django.db.backends.postgresql", "NAME": "product_design", "HOST": "localhost", "PORT": 5432, 'USER': 'pd_admin', 'PASSWORD': 'password'}
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'diffusion_api',
+       'USER': 'priyanshu',
+       'PASSWORD': 'anshU11528997!',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
+}
 
 
 # Password validation
