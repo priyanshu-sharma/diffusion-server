@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  bifrost_db:
+    image: postgres
+    ports:
+      - "5400:5432"
+  bifrost_rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - "8080:15672"
+  bifrost_redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  bifrost_celery:
+    build: bifrost
+    command: celery -A server_config worker
+    working_dir: /app/bifrost
+    volumes:
+      - .:/app
+    depends_on:
+      - bifrost_db
+      - bifrost_rabbit
+  bifrost_celery_approval:
+    build: bifrost
+    command: celery -A server_config worker -Q order_approval
+    working_dir: /app/bifrost
+    volumes:
+      - .:/app
+    depends_on:
+      - bifrost_db
+      - bifrost_rabbit
+  bifrost_web:
+    build: bifrost
+    command: python3 manage.py runserver 0.0.0.0:8100
+    working_dir: /app/bifrost
+    volumes:
+      - .:/app
+    ports:
+      - "8100:8100"
+    depends_on:
+      - bifrost_db
+      - bifrost_rabbit
+      - bifrost_celery
+      - bifrost_celery_approval
+      - bifrost_redis
+

@@ -1,0 +1,34 @@
+version: '3.1'
+services:
+  diffusion_api:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: "priyanshu"
+      POSTGRES_PASSWORD: "anshU11528997!"
+      POSTGRES_DB: "diffusion_api"
+    ports:
+      - "5432:5432"
+
+  # bifrost_rabbitmq_test:
+  #   image: rabbitmq:3-management-alpine
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: "rabbitmq"
+  #     RABBITMQ_DEFAULT_PASS: "pwd"
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+
+  redis_test:
+    image: redis:5.0-alpine
+    ports:
+      - "6379:6379"
+
+  # pgweb:
+  #   restart: always
+  #   image: sosedoff/pgweb:0.11.6
+  #   ports:
+  #     - "8085:8081"
+  #   environment:
+  #     - DATABASE_URL=postgres://postgres:postgres@bifrost_test_db:5432/bifrost_test_db?sslmode=disable
+  #   depends_on:
+  #     - bifrost_test_db

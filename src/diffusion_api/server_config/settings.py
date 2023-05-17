@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_swagger',
     'corsheaders',
+    'django_extensions',
     # application modules
     'image_model_domain',
 ]
@@ -172,3 +173,5 @@ REDIS = {
     'db': 0,
     'socket_timeout': 0.5,
 }
+
+from .local_settings import *
