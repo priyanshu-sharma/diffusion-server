@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 from services import BaseDiffusion
 
-class DiffusionV21(BaseDiffusion):
+class DiffusionV2(BaseDiffusion):
   def __init__(self):
     self.model_id = "stabilityai/stable-diffusion-2"
     super().__init__(self.model_id)
