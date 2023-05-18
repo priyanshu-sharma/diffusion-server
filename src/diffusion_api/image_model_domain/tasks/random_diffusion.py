@@ -3,12 +3,19 @@ import logging
 from server_config import BASE_DIR
 from PIL import Image
 import numpy as np
+from services import diffusionv14, diffusionv15, diffusionv2, diffusionv21
 
 logger = logging.getLogger(__name__)
 
 class RandomDiffusion:
     def __init__(self):
         self.prefix = BASE_DIR.as_posix() + '/'
+        self.MODEL_TO_SERVICE_MAP = {
+            'runwayml/stable-diffusion-v1-5': diffusionv15,
+            'stabilityai/stable-diffusion-2': diffusionv2,
+            'stabilityai/stable-diffusion-2-1': diffusionv21,
+            'CompVis/stable-diffusion-v1-4': diffusionv14
+        }
         logger.info("Initializing Random Diffusion")
         self.preprocess()
         logger.info("Pre-Processing Completed")
@@ -45,18 +52,7 @@ class RandomDiffusion:
             for selected_image in selected_images:
                 image_name = self.images[selected_image]
                 image_name_list.append(image_name)
-            logger.info("Generating Images")
-            self.get_model_service_mapping(dl_model_name).generate_image(prompt, image_name_list)
-
-    def get_model_service_mapping(self, value):
-        from services import diffusionv14, diffusionv15, diffusionv2, diffusionv21
-        self.MODEL_TO_SERVICE_MAP = {
-            'runwayml/stable-diffusion-v1-5': diffusionv15,
-            'stabilityai/stable-diffusion-2': diffusionv2,
-            'stabilityai/stable-diffusion-2-1': diffusionv21,
-            'CompVis/stable-diffusion-v1-4': diffusionv14
-        }
-        return self.MODEL_TO_SERVICE_MAP[value]
-
+            logger.info("Generating Images for model - {}".format(dl_model_name))
+            self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, image_name_list)
 
 random_diffusion = RandomDiffusion()
