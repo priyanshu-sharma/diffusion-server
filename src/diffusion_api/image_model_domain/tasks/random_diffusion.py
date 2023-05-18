@@ -42,17 +42,25 @@ class RandomDiffusion:
         logger.info("Image Model Index Mapping - {}".format(self.image_model_index_mapping))
     
     def perform_diffusion(self):
-        for i in range(0, len(self.dl_models)):
-            prompt = "generate image of cyberpunk battleship"
-            dl_model_name = self.dl_models[i]
+        for image_index in self.image_model_index_mapping:
+            dl_model_name = self.dl_models[image_index]
             logger.info("Dl Model Name - {}".format(dl_model_name))
-            selected_images = np.where(self.image_model_index_mapping == i)[0]
+            selected_images = self.images[image_index]
             logger.info("Selected Images - {}".format(selected_images))
-            image_name_list = []
-            for selected_image in selected_images:
-                image_name = self.images[selected_image]
-                image_name_list.append(image_name)
             logger.info("Generating Images for model - {}".format(dl_model_name))
-            self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, image_name_list)
+            prompt = "generate image of cyberpunk battleship"
+            self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, [selected_images])
+        # for i in range(0, len(self.dl_models)):
+        #     prompt = "generate image of cyberpunk battleship"
+        #     dl_model_name = self.dl_models[i]
+        #     logger.info("Dl Model Name - {}".format(dl_model_name))
+        #     selected_images = np.where(self.image_model_index_mapping == i)[0]
+        #     logger.info("Selected Images - {}".format(selected_images))
+        #     image_name_list = []
+        #     for selected_image in selected_images:
+        #         image_name = self.images[selected_image]
+        #         image_name_list.append(image_name)
+        #     logger.info("Generating Images for model - {}".format(dl_model_name))
+        #     self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, image_name_list)
 
 random_diffusion = RandomDiffusion()
