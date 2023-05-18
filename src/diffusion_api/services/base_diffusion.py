@@ -24,7 +24,7 @@ class BaseDiffusion:
 
     def initialize_model(self):
         self.device = self._check_for_cuda_device()
-        self.schedular = self._get_euler_discrete_scheduler()    
+        self.scheduler = self._get_euler_discrete_scheduler()    
         self.pipe = self._get_img2img_pipeline()
         self.pipe = self.pipe.to(device)
 
