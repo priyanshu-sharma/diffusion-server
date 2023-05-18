@@ -34,7 +34,7 @@ class BaseDiffusion:
             image_list = []
             for i in range(0, len(image_name_list)):
                 im = Image.open(image_name_list[i])
-                # im = im.resize((512, 512))
+                im = im.resize((512, 512))
                 print("size of Image - {}".format(im.size))
                 image_list.append(im)
             generated_image_list = self.pipe(prompt=prompt, image=image_list).images
