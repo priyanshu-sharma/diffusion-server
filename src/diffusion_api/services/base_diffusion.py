@@ -26,10 +26,10 @@ class BaseDiffusion:
         self.device = self._check_for_cuda_device()
         self.scheduler = self._get_euler_discrete_scheduler()    
         self.pipe = self._get_img2img_pipeline()
-        self.pipe = self.pipe.to(device)
+        self.pipe = self.pipe.to(self.device)
 
     def generate_image(self, prompt, image_list):
-        generated_image_list = pipe(prompt=prompt, image=image_list).images
+        generated_image_list = self.pipe(prompt=prompt, image=image_list).images
         save_image = "{}".format(str(datetime.now()))
         count = 1
         output_dict = {}
