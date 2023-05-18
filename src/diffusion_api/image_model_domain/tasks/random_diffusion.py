@@ -38,7 +38,10 @@ class RandomDiffusion:
             prompt = "generate image of cyberpunk battleship"
             dl_model_name = self.dl_models[i]
             selected_images = np.where(self.image_model_index_mapping == i)[0]
-            (image_name_list.append(self.images[selected_image]) for selected_image in selected_images)
+            image_name_list = []
+            for selected_image in selected_images:
+                image_name = self.images[selected_image]
+                image_name_list.append(image_name)
             self.get_model_service_mapping(dl_model_name).generate_image(prompt, image_name_list)
 
     def get_model_service_mapping(self, value):
