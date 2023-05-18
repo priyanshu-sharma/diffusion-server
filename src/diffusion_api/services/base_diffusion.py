@@ -30,26 +30,27 @@ class BaseDiffusion:
         self.pipe = self.pipe.to(self.device)
 
     def generate_image(self, prompt, image_name_list):
-        # try:
-        image_list = []
-        for i in range(0, len(image_name_list)):
-            im = Image.open(image_name_list[i])
-            im = im.resize((512, 512))
-            print("size of Image - {}".format(im.size))
-            image_list.append(im)
-        generated_image_list = self.pipe(prompt=prompt, image=image_list).images
-        save_image = "{}".format(str(datetime.now()))
-        count = 1
-        output_dict = {}
-        logger.info("Generated Images List - {}".format(len(generated_image_list)))
-        for i in range(0, len(generated_image_list)):
-            image = generated_image_list[0]
-            name = "{}-{}.png".format(save_image, i)
-            image.save(name)
-            input_image = image_name_list[i]
-            output_dict[input_image] = name 
-            i = i + 1
-        return output_dict
-        # except Exception as e:
-        #     logger.info(image_list)
+        try:
+            image_list = []
+            for i in range(0, len(image_name_list)):
+                im = Image.open(image_name_list[i])
+                im = im.resize((512, 512))
+                print("size of Image - {}".format(im.size))
+                image_list.append(im)
+            generated_image_list = self.pipe(prompt=prompt, image=image_list).images
+            save_image = "{}".format(str(datetime.now()))
+            count = 1
+            output_dict = {}
+            logger.info("Generated Images List - {}".format(len(generated_image_list)))
+            for i in range(0, len(generated_image_list)):
+                image = generated_image_list[0]
+                name = "{}-{}.png".format(save_image, i)
+                image.save(name)
+                input_image = image_name_list[i]
+                output_dict[input_image] = name 
+                i = i + 1
+            return output_dict
+        except Exception as e:
+            logger.info("Error image - {}".format(image_list))
+            logger.info("Error Message - {}".format(str(e)))
         
