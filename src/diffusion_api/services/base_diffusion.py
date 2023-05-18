@@ -15,11 +15,11 @@ class BaseDiffusion:
         return device
     
     def _get_euler_discrete_scheduler(self):
-        euler_discrete_scheduler = EulerDiscreteScheduler.from_pretrained(model_id, subfolder="scheduler")
+        euler_discrete_scheduler = EulerDiscreteScheduler.from_pretrained(self.model_id, subfolder="scheduler")
         return euler_discrete_scheduler
     
     def _get_img2img_pipeline(self):
-        pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id, scheduler=scheduler, torch_dtype=torch.float16)
+        pipe = StableDiffusionImg2ImgPipeline.from_pretrained(self.model_id, scheduler=self.scheduler, torch_dtype=torch.float16)
         return pipe
 
     def initialize_model(self):
