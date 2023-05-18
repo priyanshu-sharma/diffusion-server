@@ -9,4 +9,4 @@ diffusionv15 = DiffusionV15()
 diffusionv21 = DiffusionV21()
 diffusionv2 = DiffusionV2()
 
-__all__ = (diffusionv14, diffusionv15, diffusionv21, diffusionv2)
+__all__ = ('diffusionv14', 'diffusionv15', 'diffusionv21', 'diffusionv2')
