@@ -32,16 +32,20 @@ class RandomDiffusion:
                 print(image_path)
                 # print(image.id)
         self.image_model_index_mapping = np.random.randint(len(self.dl_models), size=len(self.image_list))
+        logger.info("Image Model Index Mapping - {}".format(self.image_model_index_mapping))
     
     def perform_diffusion(self):
         for i in range(0, len(self.dl_models)):
             prompt = "generate image of cyberpunk battleship"
             dl_model_name = self.dl_models[i]
+            logger.info("Dl Model Name - {}".format(dl_model_name))
             selected_images = np.where(self.image_model_index_mapping == i)[0]
+            logger.info("Selected Images - {}".format(selected_images))
             image_name_list = []
             for selected_image in selected_images:
                 image_name = self.images[selected_image]
                 image_name_list.append(image_name)
+            logger.info("Generating Images")
             self.get_model_service_mapping(dl_model_name).generate_image(prompt, image_name_list)
 
     def get_model_service_mapping(self, value):

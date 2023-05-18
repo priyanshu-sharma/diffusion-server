@@ -39,6 +39,7 @@ class BaseDiffusion:
             save_image = "{}".format(str(datetime.now()))
             count = 1
             output_dict = {}
+            logger.info("Generated Images List - {}".format(len(generated_image_list)))
             for i in range(0, len(generated_image_list)):
                 image = generated_image_list[0]
                 name = "{}-{}.png".format(save_image, i)
