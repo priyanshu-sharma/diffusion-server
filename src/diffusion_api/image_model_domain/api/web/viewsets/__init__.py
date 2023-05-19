@@ -1,0 +1,1 @@
+from image_model_domain.api.web.viewsets.random_diffusion_viewset import RandomDiffusionViewset
