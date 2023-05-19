@@ -32,7 +32,7 @@ class RandomDiffusion:
         memory_usage = psutil.Process().memory_info().rss / 1024 ** 2
         end_time = time.time()
         logger.info("Total Time Taken - {} seconds".format(end_time - start_time))
-        logger.info("Memory Usage is around - {}".format(memory_usage))
+        logger.info("Memory Usage is around - {} MB".format(memory_usage))
         return diffusion_dict
 
     def preprocess(self):
