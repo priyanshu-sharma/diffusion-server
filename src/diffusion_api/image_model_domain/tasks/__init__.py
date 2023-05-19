@@ -1,0 +1,1 @@
+from image_model_domain.tasks.random_diffusion import RandomDiffusion
