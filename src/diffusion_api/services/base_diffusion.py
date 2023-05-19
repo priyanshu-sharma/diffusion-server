@@ -42,6 +42,7 @@ class BaseDiffusion:
             generated_image = self.pipe(prompt=prompt, image=[selected_images]).images[0]
             image_name = image.split("/")[2][:-4]
             save_image = "{}-{}.png".format(image_name, "diffusion")
+            logger.info("saving image with name - {}".format(save_image))
             generated_image.save(save_image)
             return save_image
             # count = 1
