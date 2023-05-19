@@ -16,6 +16,8 @@ class RandomDiffusionViewset(viewsets.ViewSet):
             random_diffusion_schema = RandomDiffusionSchema()
             serialied_data = random_diffusion_schema.load(data)
             print(serialied_data)
-            return JsonResponse(request.data, status=status.HTTP_200_OK)
+            prompt_list = serialied_data.get('prompt_list')
+            random_diffusion = RandomDiffusion(prompt_list)
+            return JsonResponse({"Result": random_diffusion}, status=status.HTTP_200_OK)
         except Exception as e:
             return JsonResponse({"Error Message": str(e)}, status=status.HTTP_400_BAD_REQUEST)

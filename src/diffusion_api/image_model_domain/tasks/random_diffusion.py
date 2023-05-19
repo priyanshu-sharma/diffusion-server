@@ -11,7 +11,7 @@ from services import diffusionv14, diffusionv15, diffusionv2, diffusionv21
 logger = logging.getLogger(__name__)
 
 class RandomDiffusion:
-    def __init__(self, prompt_list):
+    def __init__(self, prompt_list=["generate image of cyberpunk battleship", "cat dancing in rain", "dogs sitting on sofa", "beautiful landscape with sea and mountains"]):
         self.prefix = BASE_DIR.as_posix() + '/'
         self.MODEL_TO_SERVICE_MAP = {
             'runwayml/stable-diffusion-v1-5': diffusionv15,
@@ -84,5 +84,3 @@ class RandomDiffusion:
         #     logger.info("Generating Images for model - {}".format(dl_model_name))
         #     self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, image_name_list)
 
-prompt_list = ["generate image of cyberpunk battleship", "cat dancing in rain", "dogs sitting on sofa", "beautiful landscape with sea and mountains"]
-random_diffusion = RandomDiffusion(prompt_list)
