@@ -3,12 +3,15 @@ import logging
 from server_config import BASE_DIR
 from PIL import Image
 import numpy as np
+import random
+import time
+import psutil
 from services import diffusionv14, diffusionv15, diffusionv2, diffusionv21
 
 logger = logging.getLogger(__name__)
 
 class RandomDiffusion:
-    def __init__(self):
+    def __init__(self, prompt_list):
         self.prefix = BASE_DIR.as_posix() + '/'
         self.MODEL_TO_SERVICE_MAP = {
             'runwayml/stable-diffusion-v1-5': diffusionv15,
@@ -16,11 +19,21 @@ class RandomDiffusion:
             'stabilityai/stable-diffusion-2-1': diffusionv21,
             'CompVis/stable-diffusion-v1-4': diffusionv14
         }
+        self.prompt_list = prompt_list
+        self.initiate_diffusion()
+
+    def initiate_diffusion(self):
+        start_time = time.time()
         logger.info("Initializing Random Diffusion")
         self.preprocess()
         logger.info("Pre-Processing Completed")
-        self.perform_diffusion()
+        diffusion_dict = self.perform_diffusion()
         logger.info("Diffusion Completed")
+        memory_usage = psutil.Process().memory_info().rss / 1024 ** 2
+        end_time = end_time()
+        logger.info("Total Time Taken - {} seconds".format(end_time - start_time))
+        logger.info("Memory Usage is around - {}".format(memory_usage))
+        return diffusion_dict
 
     def preprocess(self):
         # images = Images.objects.all()
@@ -42,14 +55,20 @@ class RandomDiffusion:
         logger.info("Image Model Index Mapping - {}".format(self.image_model_index_mapping))
     
     def perform_diffusion(self):
+        diffusion_dict = {}
         for image_index in self.image_model_index_mapping:
             dl_model_name = self.dl_models[image_index]
             logger.info("Dl Model Name - {}".format(dl_model_name))
             selected_images = self.images[image_index]
+            selected_images = Image.open(selected_images)
+            selected_images = selected_images.resize((512, 512))
             logger.info("Selected Images - {}".format(selected_images))
             logger.info("Generating Images for model - {}".format(dl_model_name))
-            prompt = "generate image of cyberpunk battleship"
-            self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, [selected_images])
+            prompt_index = random.randint(0, len(self.prompt_list)-1)
+            prompt = self.prompt_list[prompt_index]
+            diffusion_image = self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, [selected_images])
+            diffusion_dict[self.images[image_index]] = diffusion_image
+        return diffusion_dict
         # for i in range(0, len(self.dl_models)):
         #     prompt = "generate image of cyberpunk battleship"
         #     dl_model_name = self.dl_models[i]
@@ -63,4 +82,5 @@ class RandomDiffusion:
         #     logger.info("Generating Images for model - {}".format(dl_model_name))
         #     self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, image_name_list)
 
-random_diffusion = RandomDiffusion()
+prompt_list = ["generate image of cyberpunk battleship", "cat dancing in rain", "dogs sitting on sofa", "beautiful landscape with sea and mountains"]
+random_diffusion = RandomDiffusion(prompt_list)
