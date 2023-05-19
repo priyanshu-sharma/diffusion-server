@@ -174,4 +174,4 @@ REDIS = {
     'socket_timeout': 0.5,
 }
 
-from .local_settings import *
+# from .local_settings import *
