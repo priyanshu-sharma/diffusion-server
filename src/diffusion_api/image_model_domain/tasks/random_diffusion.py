@@ -43,12 +43,12 @@ class RandomDiffusion:
         for image in self.images:
             try:
                 # image_path = image.path
-                image_path = self.prefix + image
+                image_path = image
                 im = Image.open(r'{}'.format(image_path))
                 # im.show()
                 self.image_list.append(im)
             except Exception as e:
-                print(image_path)
+                print("Error log for image {} - {}".format(image_path, str(e)))
                 # print(image.id)
         self.image_model_index_mapping = np.random.randint(len(self.dl_models), size=len(self.image_list))
         logger.info("Image Model Index Mapping - {}".format(self.image_model_index_mapping))
