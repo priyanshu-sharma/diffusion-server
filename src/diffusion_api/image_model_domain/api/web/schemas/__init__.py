@@ -1,0 +1,1 @@
+from image_model_domain.api.web.schemas.random_diffusion_schema import RandomDiffusionSchema

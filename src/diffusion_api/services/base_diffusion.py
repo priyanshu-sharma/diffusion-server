@@ -57,6 +57,6 @@ class BaseDiffusion:
             #     i = i + 1
             # return output_dict
         except Exception as e:
-            logger.info("Error image - {}".format(image_list))
+            logger.info("Error image - {}".format(image))
             logger.info("Error Message - {}".format(str(e)))
         
