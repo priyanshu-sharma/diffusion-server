@@ -5,6 +5,7 @@ import numpy as np
 import random
 import time
 import psutil
+from PIL import Image
 from services import diffusionv14, diffusionv15, diffusionv2, diffusionv21
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ class RandomDiffusion:
         for image in self.images:
             try:
                 # image_path = image.path
-                image_path = image
+                image_path = self.prefix + image
                 im = Image.open(r'{}'.format(image_path))
                 # im.show()
                 self.image_list.append(im)
