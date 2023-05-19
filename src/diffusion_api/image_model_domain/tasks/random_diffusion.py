@@ -63,10 +63,10 @@ class RandomDiffusion:
             selected_images = self.images[image_count]
             # selected_images = Image.open(selected_images)
             # selected_images = selected_images.resize((512, 512))
-            logger.info("Selected Images - {}".format(selected_images))
-            logger.info("Generating Images for model - {}".format(dl_model_name))
+            # logger.info("Generating Images for model - {}".format(dl_model_name))
             prompt_index = random.randint(0, len(self.prompt_list)-1)
             prompt = self.prompt_list[prompt_index]
+            logger.info("Selected Images - {} using prompt - {}".format(selected_images, prompt))
             diffusion_image = self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, selected_images)
             diffusion_dict[self.images[image_index]] = diffusion_image
             image_count = image_count + 1
