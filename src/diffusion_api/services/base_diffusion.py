@@ -29,7 +29,7 @@ class BaseDiffusion:
         self.pipe = self._get_img2img_pipeline()
         self.pipe = self.pipe.to(self.device)
 
-    def generate_image(self, prompt, image_list):
+    def generate_image(self, prompt, image):
         try:
             # image_list = []
             # for i in range(0, len(image_name_list)):
@@ -37,8 +37,11 @@ class BaseDiffusion:
             #     im = im.resize((512, 512))
             #     print("size of Image - {}".format(im.size))
             #     image_list.append(im)
-            generated_image = self.pipe(prompt=prompt, image=image_list).images[0]
-            save_image = "{}".format(str(datetime.now()))
+            selected_images = Image.open(image)
+            selected_images = selected_images.resize((512, 512))
+            generated_image = self.pipe(prompt=prompt, image=[selected_images]).images[0]
+            image_name = image.split("/")[2][:-4]
+            save_image = "{}-{}.png".format(image_name, "diffusion")
             generated_image.save(save_image)
             return save_image
             # count = 1

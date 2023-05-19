@@ -1,7 +1,6 @@
 import logging
 # from image_model_domain.models import Images , DLModels
 from server_config import BASE_DIR
-from PIL import Image
 import numpy as np
 import random
 import time
@@ -60,13 +59,13 @@ class RandomDiffusion:
             dl_model_name = self.dl_models[image_index]
             logger.info("Dl Model Name - {}".format(dl_model_name))
             selected_images = self.images[image_index]
-            selected_images = Image.open(selected_images)
-            selected_images = selected_images.resize((512, 512))
+            # selected_images = Image.open(selected_images)
+            # selected_images = selected_images.resize((512, 512))
             logger.info("Selected Images - {}".format(selected_images))
             logger.info("Generating Images for model - {}".format(dl_model_name))
             prompt_index = random.randint(0, len(self.prompt_list)-1)
             prompt = self.prompt_list[prompt_index]
-            diffusion_image = self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, [selected_images])
+            diffusion_image = self.MODEL_TO_SERVICE_MAP[dl_model_name].generate_image(prompt, selected_images)
             diffusion_dict[self.images[image_index]] = diffusion_image
         return diffusion_dict
         # for i in range(0, len(self.dl_models)):
