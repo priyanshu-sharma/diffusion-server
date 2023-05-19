@@ -39,7 +39,7 @@ class BaseDiffusion:
             #     image_list.append(im)
             generated_image = self.pipe(prompt=prompt, image=image_list).images[0]
             save_image = "{}".format(str(datetime.now()))
-            generated_image.save(save_name)
+            generated_image.save(save_image)
             return save_image
             # count = 1
             # output_dict = {}
