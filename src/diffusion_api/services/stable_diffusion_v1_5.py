@@ -36,5 +36,5 @@ class DiffusionV15(BaseDiffusion):
 #     raise NotImplementedError
 
   def generate_image(self, prompt, image_list):
-    raise super().generate_image(prompt, image_list)
+    super().generate_image(prompt, image_list)
   
