@@ -35,5 +35,5 @@ class DiffusionV21(BaseDiffusion):
 #   def initialize_model(self):
 #     raise NotImplementedError
 
-#   def generate_image(self, prompt, image_list):
-#     raise NotImplementedError
+  def generate_image(self, prompt, image_list):
+    raise super().generate_image(prompt, image_list)
