@@ -92,7 +92,9 @@ python src/diffusion_api/manage.py loaddata src/diffusion_api/fixtures/*.json
 For 17 images, with 4 different random choosen diffusion model, I am able to generate new images for all 17 images within 
 
 Total Time Taken - 44.27491855621338 seconds
+
 Memory Usage is around - 7627.07421875 MB
+
 Average Time/Image - 2.60 seconds
 
 You can also get the results for your images by running the run_entire_flow.ipynb file.
